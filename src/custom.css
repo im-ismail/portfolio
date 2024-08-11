@@ -1,0 +1,56 @@
+.border-jet {
+    border: 1px solid #383838;
+}
+
+.bg-onyx {
+    background: linear-gradient(to bottom right, #404040 0%, #40404000 50%);
+}
+
+.bg-yellow {
+    background: linear-gradient(to bottom right, #ffda6b 0%, #ffc06100 50%);
+}
+
+.hover\:bg-yellow:hover {
+    background: linear-gradient(to bottom right, #ffda6b 0%, #ffc06100 50%);
+}
+
+.bg-gradient {
+    background: linear-gradient(to bottom right, #2d2d2e40 0%, #1b1b1d00 100%), #202022;
+}
+
+.bg-orange {
+    background: linear-gradient(to right, #ffdb70, #ffbb5c);
+}
+
+.bt-line::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 5px;
+    background: linear-gradient(to right, #ffdb70, #ffbb5c);
+    border-radius: 3px;
+}
+
+.left-line::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: -27px;
+    width: 1px;
+    height: calc(100% + 25px);
+    background: #383838;
+}
+
+.left-line::after {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: -31.5px;
+    height: 10px;
+    width: 10px;
+    background: linear-gradient(to right, #ffdb70, #ffbb5c);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #383838;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        .image-slider {
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        li {
+            flex: 0 0 100%;
+            margin-right: 10px;
+            touch-action: pan-y;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="image-slider">
+        <ul>
+            <li><img src="https://via.placeholder.com/800x400?text=Image+1" alt="Image 1"></li>
+            <li><img src="https://via.placeholder.com/800x400?text=Image+2" alt="Image 2"></li>
+            <li><img src="https://via.placeholder.com/800x400?text=Image+3" alt="Image 3"></li>
+            <!-- Add more slides as needed with actual image URLs -->
+        </ul>
+    </div>
+
+    <!-- Add navigation buttons with IDs -->
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+
+    <script>
+        const slider = document.querySelector(".image-slider ul");
+        const slides = document.querySelectorAll(".image-slider li");
+        const slideWidth = slides[0].clientWidth;
+        let slideIndex = 0;
+        let touchStartX = 0;
+
+        function nextSlide() {
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+            updateSlider();
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            updateSlider();
+        }
+
+        function handleTouchStart(event) {
+            console.log(event);
+            touchStartX = event.touches[0].clientX;
+        }
+
+        function handleTouchMove(event) {
+            console.log(event);
+            const touchEndX = event.changedTouches[0].clientX;
+            const touchDiffX = touchEndX - touchStartX;
+
+            if (touchDiffX > 50) {
+                prevSlide();
+            } else if (touchDiffX < -50) {
+                nextSlide();
+            }
+
+            touchStartX = 0;
+        }
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        }
+
+        // Add event listeners for navigation buttons
+        document.querySelector("#nextBtn").addEventListener("click", nextSlide);
+        document.querySelector("#prevBtn").addEventListener("click", prevSlide);
+
+        // Add touch event listeners for swiping
+        slider.addEventListener("touchstart", handleTouchStart);
+        slider.addEventListener("touchend", handleTouchMove);
+        // slider.addEventListener("touchmove", handleTouchMove);
+
+        // Optional: Create an automatic slider
+        setInterval(nextSlide, 3000); // Change slides every 3 seconds
+    </script>
+</body>
+
+</html>
